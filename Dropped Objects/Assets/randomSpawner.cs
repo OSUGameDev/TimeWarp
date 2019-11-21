@@ -6,10 +6,16 @@ public class randomSpawner : MonoBehaviour {
     private int rand;
     public Sprite[] Sprite_Pic;
     Vector2 temp;
-    private int randSize;
-    public float rotateSpeed = .0f;
-	// Use this for initialization
-	void Start () {
+    private float randSize;
+    /// <summary>
+    /// ////
+    /// </summary>
+    Vector2 screenBounds;
+    public float minObjSize = 2f;
+    public float maxObjSize = 5f;
+    // Use this for initialization
+    void Start () {
+        screenBounds = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
         getRandSize();
 
         rand = Random.Range(0, Sprite_Pic.Length);
@@ -23,7 +29,9 @@ public class randomSpawner : MonoBehaviour {
 
     void getRandSize ()
     {
-        randSize = Random.Range(1, 4);
+        minObjSize = screenBounds.y / 4;
+        maxObjSize = screenBounds.y / 1.5f;
+        randSize = Random.Range(minObjSize, maxObjSize);
         temp = transform.localScale;
         temp.x = randSize;
         temp.y = randSize;

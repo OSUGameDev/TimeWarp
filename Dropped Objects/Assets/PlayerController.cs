@@ -6,14 +6,21 @@ public class PlayerController : MonoBehaviour {
     public float moveSpeed = 3f;
     Rigidbody2D body;
     Vector2 playerMovement;
+    ////////////
     int walk = 0;
     public Sprite[] Sprite_Pic;
     public float wait = 0f;
     public float armSpeed = 0.5f;
+    ////////////
+    public Vector2 screenBounds;
+    float playerHeight;
 
     void Start () {
-        body = GetComponent<Rigidbody2D>();
-       
+        body = GetComponent<Rigidbody2D>(); //get our body to move
+        playerHeight = transform.localScale.y / -2; //get our objects height so it is not centered on bounds
+        screenBounds = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize + playerHeight); //get our camera bounds
+
+
     }
 
     // Update is called once per frame
@@ -25,33 +32,40 @@ public class PlayerController : MonoBehaviour {
             wait = 0;
         }
         wait += Time.deltaTime;
-        
-        playerMovement.x = 0; //can only move up and down
-        playerMovement.y = Input.GetAxis("Vertical");
+
+        getMovement();
+        getBounds();
 	}
 
-    void FixedUpdate()
+   
+    void getBounds()
     {
-        if (transform.position.y <= -2.7f)
+        if (transform.position.y <= -screenBounds.y / 2)
         {
-            transform.position = new Vector2(transform.position.x, -2.7f);
-        }
-        else if (transform.position.y >= 2.7f)
+            transform.position = new Vector2(transform.position.x, -screenBounds.y / 2);    //Checks if it goes out of bounds and then changes the position 
+        }                                                                                   // keeping it in bounds
+        else if (transform.position.y >= screenBounds.y / 2)
         {
-            transform.position = new Vector2(transform.position.x, 2.7f);
+            transform.position = new Vector2(transform.position.x, screenBounds.y / 2);
         }
+    }
+
+    void getMovement()
+    {
         
-        body.MovePosition(body.position + playerMovement * moveSpeed * Time.fixedDeltaTime);
+        float getY = Input.GetAxis("Vertical"); //gets our input to move up, don't need x axis
+
+        Vector3 movement = new Vector3(0, getY, 0) * moveSpeed * Time.deltaTime;
+
+        body.MovePosition(transform.position + movement);
     }
 
     void getSprite()
     {
-        GetComponent<SpriteRenderer>().sprite = Sprite_Pic[walk];
-        walk++;
-        if (walk >= 2)
+        GetComponent<SpriteRenderer>().sprite = Sprite_Pic[walk]; //get our sprite 
+        walk++; //get next movement
+        if (walk >= 2)  //if it got that reinitialize to 0 because theres only 2 movement
             walk = 0;
     }
 
-    
-    
 }

@@ -9,19 +9,20 @@ public class hazardSpawner : MonoBehaviour {
     public float spawnRate = 2f;
     float nextSpawn = 0.0f;
 
-    // GameObject.GetComponent(Movement).speed = 1;
-    // Use this for initialization
+    public Vector2 screenBounds;
+    float ourRange;
     void Start () {
-       // GameObject.GetComponent(Movement).moveSpeed = 1;
-        
+        screenBounds = new Vector2(Camera.main.aspect * Camera.main.orthographicSize, Camera.main.orthographicSize);
+
     }
 	
 	// Update is called once per frame
 	void Update () {
 		if(Time.time > nextSpawn)
         {
+            ourRange = screenBounds.y / 2;
             nextSpawn = Time.time + spawnRate;
-            randY = Random.Range(-4f, 4f);
+            randY = Random.Range(-ourRange, ourRange);  //get random range within camera bounds
             whereToSpawn = new Vector2(transform.position.x, randY);
             Instantiate(hazard, whereToSpawn, Quaternion.identity);
         } 
