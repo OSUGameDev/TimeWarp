@@ -125,14 +125,13 @@ GameObject:
   - component: {fileID: 272818723}
   - component: {fileID: 272818722}
   - component: {fileID: 272818726}
-  - component: {fileID: 272818727}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!58 &272818722
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -221,8 +220,8 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 272818721}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -4, y: 0, z: 0}
-  m_LocalScale: {x: 0.4, y: 0.4, z: 1}
+  m_LocalPosition: {x: -3.5, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -244,17 +243,7 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 2f31af8848c278147a607d09eb42cd9d, type: 3}
   wait: 0
   armSpeed: 0.5
---- !u!114 &272818727
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 272818721}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 145cc460cd3fe9f4da357b0975909f5d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  screenBounds: {x: 0, y: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -394,3 +383,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hazard: {fileID: 1671169475550804, guid: 7d499305c12318746a88f7e99f2dcde4, type: 2}
   spawnRate: 1
+  screenBounds: {x: 0, y: 0}
