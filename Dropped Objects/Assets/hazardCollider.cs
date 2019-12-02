@@ -9,17 +9,12 @@ public class hazardCollider : MonoBehaviour {
 	void OnTriggerEnter2D (Collider2D other) //if the object hit the player
     {
         //Don't need to check if it was player because that is the only possibility
-        Time.timeScale = 0;
-     
+        //Time.timeScale = 0;
+
         //gameOver.SetActive(true);
-        //gameOver = GetComponent<Canvas>();
-       // Restart();
+        gameOver.gameIsOver = true;
         
     }
 
-    void Restart()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-    }
+    
 }
