@@ -14,6 +14,9 @@ public class PlayerController : MonoBehaviour {
     ////////////
     public Vector2 screenBounds;
     float playerHeight;
+    ////
+    public ParticleSystem particleOne;
+    public ParticleSystem particleUp;
 
     void Start () {
         body = GetComponent<Rigidbody2D>(); //get our body to move
@@ -58,6 +61,21 @@ public class PlayerController : MonoBehaviour {
         Vector3 movement = new Vector3(0, getY, 0) * moveSpeed * Time.deltaTime;
 
         body.MovePosition(transform.position + movement);
+        if (Input.GetKey("up")) {
+           
+            particleUp.Play();  //play this to make it go faster and further when going up
+            particleOne.Stop();
+        }
+        else if(Input.GetKey("down"))
+        {
+            particleUp.Stop();  //going down so stop both
+            particleOne.Stop();
+        }
+        else
+        {
+            particleOne.Play(); //otherwise do default
+            particleUp.Stop();
+        }
     }
 
     void getSprite()

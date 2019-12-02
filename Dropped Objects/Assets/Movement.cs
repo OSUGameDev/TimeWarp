@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class Movement : MonoBehaviour {
     
@@ -19,7 +17,7 @@ public class Movement : MonoBehaviour {
 
         transform.Translate(-moveSpeed * Time.deltaTime, 0, 0);
 
-        transform.RotateAround(transform.position, transform.position, 20 * Time.deltaTime); //kinda cool makes the weird rotate effect
+        //transform.RotateAround(transform.position, transform.position, 20 * Time.deltaTime); //kinda cool makes the weird rotate effect
     }    
 
 }
