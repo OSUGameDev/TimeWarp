@@ -7,14 +7,30 @@ public class gameOver : MonoBehaviour {
     // Use this for initialization
     public static bool gameIsOver = false;
     public GameObject gameOverUI;
-	void Start () {
-		
+    /// <summary>
+    public AudioSource sound;
+    public AudioClip soundClip;
+    /// <summary>
+    public AudioSource deathSound;
+    public AudioClip deathClip;
+    private bool soundPlayed = false;
+    /// </summary>
+    void Start () {
+        sound.clip = soundClip;
+        deathSound.clip = deathClip;
+        
 	}
 	
 	// Update is called once per frame
 	void Update () {
         if(gameIsOver)
         {
+            if(!soundPlayed)
+            {
+                deathSound.PlayOneShot(deathSound.clip);
+                soundPlayed = true;
+            }
+            
             Pause();
         }
        
@@ -22,6 +38,7 @@ public class gameOver : MonoBehaviour {
 
     void Pause ()
     {
+        
         gameOverUI.SetActive(true);
         Time.timeScale = 0f;
         gameIsOver = true;
@@ -29,16 +46,37 @@ public class gameOver : MonoBehaviour {
 
     public void Restart()
     {
-        Debug.Log("Restarting Game");
-        Time.timeScale = 1f;
-        //SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        SceneManager.LoadScene("Moving Objects");
-        gameIsOver = false;
+        StartCoroutine(WaitForSoundRestart()); //Call restart function
+        gameIsOver = false; //Now game is not over so set to false
     }
 
     public void getMainScreen ()
     {
-        Restart();
-        SceneManager.LoadScene("mainMenu");
+        StartCoroutine(WaitForSoundMain()); //call function to get main
+        gameIsOver = false;
     }
+
+
+    IEnumerator WaitForSoundMain()
+    {    //So the sound plays all the way before changing scenes
+
+        
+        sound.PlayOneShot(sound.clip);  //play the sound
+        yield return new WaitForSecondsRealtime(sound.clip.length); //wait to do anything until sound finishes need real time since time scale is 0
+        Time.timeScale = 1f;    //reset timescale
+        SceneManager.LoadScene("Moving Objects");   //reset objects scene
+        SceneManager.LoadScene("mainMenu"); //switch to main menu
+    }
+
+    IEnumerator WaitForSoundRestart()
+    {    //So the sound plays all the way before changing scenes
+        
+        sound.PlayOneShot(sound.clip);  //Same here
+        yield return new WaitForSecondsRealtime(sound.clip.length);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("Moving Objects"); // relod scene and start again
+        
+    }
+
+    
 }
