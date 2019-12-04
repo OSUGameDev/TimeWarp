@@ -1266,7 +1266,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 2800000, guid: 6130cd9cf865af94395fc842664d21e9, type: 3}
+    m_Texture: {fileID: 2800000, guid: 6e1ff1674a70b0041a6f2e8b7734f23d, type: 3}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0
@@ -6289,7 +6289,7 @@ ParticleSystem:
     m_UseMeshMaterialIndex: 0
     m_UseMeshColors: 1
     alignToDirection: 0
-    m_Texture: {fileID: 2800000, guid: 6130cd9cf865af94395fc842664d21e9, type: 3}
+    m_Texture: {fileID: 2800000, guid: 6e1ff1674a70b0041a6f2e8b7734f23d, type: 3}
     m_TextureClipChannel: 3
     m_TextureClipThreshold: 0
     m_TextureUVChannel: 0
