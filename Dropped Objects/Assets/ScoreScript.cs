@@ -9,7 +9,7 @@ public class ScoreScript : MonoBehaviour
     public static int scorevalue = 0;
     //private float realtimepassed = 0.0f;
     Text score;
-
+    
 
     // Use this for initialization
     void Start()
