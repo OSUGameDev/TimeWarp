@@ -46,14 +46,16 @@ public class gameOver : MonoBehaviour {
 
     public void Restart()
     {
+        sound.PlayOneShot(sound.clip);  //Same here
         StartCoroutine(WaitForSoundRestart()); //Call restart function
-        gameIsOver = false; //Now game is not over so set to false
+        
     }
 
     public void getMainScreen ()
     {
+        sound.PlayOneShot(sound.clip);  //play the sound
         StartCoroutine(WaitForSoundMain()); //call function to get main
-        gameIsOver = false;
+        
     }
 
 
@@ -61,21 +63,22 @@ public class gameOver : MonoBehaviour {
     {    //So the sound plays all the way before changing scenes
 
         
-        sound.PlayOneShot(sound.clip);  //play the sound
+        //sound.PlayOneShot(sound.clip);  //play the sound
         yield return new WaitForSecondsRealtime(sound.clip.length); //wait to do anything until sound finishes need real time since time scale is 0
-        Time.timeScale = 1f;    //reset timescale
+        //Time.timeScale = 1f;    //reset timescale
         SceneManager.LoadScene("Moving Objects");   //reset objects scene
         SceneManager.LoadScene("mainMenu"); //switch to main menu
+        gameIsOver = false;
+        Time.timeScale = 1f;
     }
 
     IEnumerator WaitForSoundRestart()
     {    //So the sound plays all the way before changing scenes
-        
-        sound.PlayOneShot(sound.clip);  //Same here
+        Debug.Log("Waiting");
+        //sound.PlayOneShot(sound.clip);  //Same here
         yield return new WaitForSecondsRealtime(sound.clip.length);
-        Time.timeScale = 1f;
         SceneManager.LoadScene("Moving Objects"); // relod scene and start again
-        
+        gameIsOver = false; //Now game is not over so set to false
     }
 
     
