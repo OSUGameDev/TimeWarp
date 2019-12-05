@@ -55,18 +55,18 @@ public class PlayerController : MonoBehaviour {
 
     void getMovement()
     {
-        
+
         float getY = Input.GetAxis("Vertical"); //gets our input to move up, don't need x axis
 
         Vector3 movement = new Vector3(0, getY, 0) * moveSpeed * Time.deltaTime;
 
         body.MovePosition(transform.position + movement);
-        if (Input.GetKey("up")) {
-           
+        if (Input.GetKey("up") || Input.GetKey("w")) {
+
             particleUp.Play();  //play this to make it go faster and further when going up
             particleOne.Stop();
         }
-        else if(Input.GetKey("down"))
+        else if (Input.GetKey("down") || Input.GetKey("s"))
         {
             particleUp.Stop();  //going down so stop both
             particleOne.Stop();
